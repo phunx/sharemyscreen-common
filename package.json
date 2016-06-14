@@ -1,0 +1,45 @@
+{
+  "name": "sharemyscreen-common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/phunx/sharemyscreen-common.git"
+  },
+  "authors": [
+    "Jérémy Bel",
+    "Justin Ferrieu"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JrmyB/sharemyscreen-streaming/issues"
+  },
+  "homepage": "https://github.com/JrmyB/sharemyscreen-streaming#readme",
+  "dependencies": {
+    "axon": "^2.0.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "bcrypt": "^0.8.7",
+    "change-case": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "is_js": "^0.8.0",
+    "lodash": "^4.13.1",
+    "mongorito": "^2.1.2",
+    "peer": "^0.2.8",
+    "require-dir": "^0.3.0",
+    "restler": "^3.4.0"
+  },
+  "devDependencies": {
+    "gulp-ava": "^0.11.0",
+    "gulp-xo": "^0.11.0",
+    "xo": "^0.15.1"
+  },
+  "xo": {
+    "esnext": true
+  }
+}
