@@ -1,6 +1,7 @@
 'use strict';
 
 const lib = {
+	Mongorito: require('mongorito'),
 	Model: require('./build/model'),
 	Utils: require('./build/utils').Utils,
 	Tenant: require('./build/models/abstracts/tenant'),

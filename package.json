@@ -1,7 +1,8 @@
 {
   "name": "sharemyscreen-common",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Common objects library for ShareMyScreen services",
   "main": "index.js",
   "scripts": {
     "test": ""
@@ -10,29 +11,21 @@
     "type": "git",
     "url": "git+ssh://git@github.com/phunx/sharemyscreen-common.git"
   },
-  "authors": [
-    "Jérémy Bel",
-    "Justin Ferrieu"
-  ],
+  "authors": "Justin Ferrieu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JrmyB/sharemyscreen-streaming/issues"
+    "url": "https://github.com/phunx/sharemyscreen-common/issues"
   },
-  "homepage": "https://github.com/JrmyB/sharemyscreen-streaming#readme",
+  "homepage": "https://github.com/phunx/sharemyscreen-common#readme",
   "dependencies": {
-    "axon": "^2.0.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
     "babel-preset-stage-0": "^6.5.0",
     "bcrypt": "^0.8.7",
     "change-case": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "is_js": "^0.8.0",
     "lodash": "^4.13.1",
-    "mongorito": "^2.1.2",
-    "peer": "^0.2.8",
-    "require-dir": "^0.3.0",
-    "restler": "^3.4.0"
+    "mongorito": "^2.1.2"
   },
   "devDependencies": {
     "gulp-ava": "^0.11.0",
