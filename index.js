@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const lib = {
 	Mongorito: require('mongorito'),
 	Model: require('./build/model'),
@@ -17,4 +19,9 @@ const lib = {
 	User: require('./build/models/user')
 };
 
-module.exports = lib;
+module.exports = _.mapValues(lib, val => {
+	if (val.__esModule && _.has(val, 'default')) {
+		return val.default;
+	}
+	return val;
+});
