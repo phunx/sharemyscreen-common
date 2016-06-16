@@ -6,11 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _mongorito = require('mongorito');
 
-var Mongorito = _interopRequireWildcard(_mongorito);
-
-var _is_js = require('is_js');
-
-var is = _interopRequireWildcard(_is_js);
+var _mongorito2 = _interopRequireDefault(_mongorito);
 
 var _lodash = require('lodash');
 
@@ -20,9 +16,7 @@ var _changeCase = require('change-case');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-class Model extends Mongorito.Model {
+class Model extends _mongorito2.default.Model {
 	constructor(data, options) {
 		super(Model._snakeCaseRename(data), options);
 
@@ -119,13 +113,13 @@ class Model extends Mongorito.Model {
 						continue;
 					}
 
-					if (!is.array(parent.get(relationship.childPath))) {
+					if (!_lodash2.default.isArray(parent.get(relationship.childPath))) {
 						parent.set(relationship.childPath, parent.get(relationship.childPath) ? [parent.get(relationship.childPath)] : []);
 					}
 
 					const children = parent.get(relationship.childPath);
 
-					if (!is.inArray(this.get('_id'), children)) {
+					if (!_lodash2.default.includes(children, this.get('_id'))) {
 						children.push(this.get('_id'));
 						parent.save();
 					}
@@ -135,20 +129,15 @@ class Model extends Mongorito.Model {
 	}
 
 	static _camelCaseRename(data) {
-		const rename = require('rename-keys');
-
-		return rename(data, key => {
+		return _lodash2.default.mapKeys(data, (val, key) => {
 			return (0, _changeCase.camelCase)(key);
 		});
 	}
 
 	static _snakeCaseRename(data) {
-		const rename = require('rename-keys');
-
-		return rename(data, key => {
+		return _lodash2.default.mapKeys(data, (val, key) => {
 			return (0, _changeCase.snakeCase)(key);
 		});
 	}
 }
-
 exports.default = Model;
