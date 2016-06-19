@@ -4,23 +4,46 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _model = require('../model');
+var _mongoose = require('mongoose');
 
-var _model2 = _interopRequireDefault(_model);
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
 var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Client extends _model2.default {
-	constructor(data) {
-		super(data);
-		this.default({
-			trusted: false,
-			scope: ['offline_access'],
-			key: _utils.Utils.uidGen(16),
-			secret: _utils.Utils.uidGen(32)
-		});
+const Schema = _mongoose2.default.Schema;
+
+const clientSchema = new Schema({
+	name: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	key: {
+		type: String,
+		unique: true
+	},
+	secret: {
+		type: String,
+		unique: true
+	},
+	scope: {
+		type: [String],
+		default: ['offline_access']
+	},
+	trusted: {
+		type: Boolean,
+		default: false
 	}
-}
-exports.default = Client;
+}, { timestamps: true });
+
+clientSchema.pre('save', next => {
+	const client = undefined;
+
+	client.key = client.key || (0, _utils.uidGen)(16);
+	client.secret = client.secret || (0, _utils.uidGen)(32);
+	next();
+});
+
+exports.default = _mongoose2.default.model('Client', clientSchema);

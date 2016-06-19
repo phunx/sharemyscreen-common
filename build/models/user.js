@@ -4,61 +4,42 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _bcrypt = require('bcrypt');
+var _mongoose = require('mongoose');
 
-var _bcrypt2 = _interopRequireDefault(_bcrypt);
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _model = require('../model');
+var _mongooseBcrypt = require('mongoose-bcrypt');
 
-var _model2 = _interopRequireDefault(_model);
+var _mongooseBcrypt2 = _interopRequireDefault(_mongooseBcrypt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class User extends _model2.default {
-	constructor(data) {
-		super(data, { safe: true });
-		this.require('username');
-		this.require('email');
-		if (data.password !== undefined) {
-			this.before('create', 'encryptPassword');
-		}
-	}
+const Schema = _mongoose2.default.Schema;
 
-	toJSON() {
-		const json = super.toJSON();
+const userSchema = new Schema({
+	username: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	password: {
+		type: String,
+		bcrypt: true
+	},
+	firstName: String,
+	lastName: String,
+	googleId: String,
+	facebookId: String,
+	phone: String
+}, { timestamps: true });
 
-		json.password = undefined;
-		return json;
-	}
+userSchema.virtual('fullName').get(() => '${this.firstName} ${this.lastName}');
 
-	comparePassword(password) {
-		return new Promise((resolve, reject) => {
-			_bcrypt2.default.compare(password, this.get('password'), (err, isMatch) => {
-				if (err) {
-					return reject(err);
-				}
-				return resolve(isMatch);
-			});
-		}).then(isMatch => {
-			return isMatch;
-		});
-	}
+userSchema.plugin(_mongooseBcrypt2.default);
 
-	*encryptPassword() {
-		yield new Promise((resolve, reject) => {
-			_bcrypt2.default.genSalt(5, (err, salt) => {
-				if (err) {
-					return reject(err);
-				}
-				_bcrypt2.default.hash(this.get('password'), salt, (err, password) => {
-					if (err) {
-						return reject(err);
-					}
-					this.set('password', password);
-					resolve();
-				});
-			});
-		});
-	}
-}
-exports.default = User;
+exports.default = _mongoose2.default.model('User', userSchema);

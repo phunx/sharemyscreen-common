@@ -4,26 +4,37 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _tenant = require('./abstracts/tenant');
+var _mongoose = require('mongoose');
 
-var _tenant2 = _interopRequireDefault(_tenant);
-
-var _user = require('./user');
-
-var _user2 = _interopRequireDefault(_user);
+var _mongoose2 = _interopRequireDefault(_mongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Room extends _tenant2.default {
-	constructor(data) {
-		super(data);
-		this.before('create', 'defaultName');
-		this.relationship('members', _user2.default, 'rooms');
-		this.default('messages', []);
-	}
+const Schema = _mongoose2.default.Schema;
 
-	defaultName() {
-		this.set('name', this.get('name') || this.get('members')[0].get('name'));
-	}
-}
-exports.default = Room;
+const roomSchema = new Schema({
+	owner: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
+	members: [{
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	}],
+	messages: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Message'
+	}],
+	name: String
+}, { timestamps: true });
+
+roomSchema.pre('save', next => {
+	const room = undefined;
+
+	room.members.unshift(room.owner);
+	next();
+});
+
+exports.default = _mongoose2.default.model('Room', roomSchema);

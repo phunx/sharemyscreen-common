@@ -4,24 +4,43 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _token = require('./abstracts/token');
+var _mongoose = require('mongoose');
 
-var _token2 = _interopRequireDefault(_token);
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+var _utils = require('../utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class RequestToken extends _token2.default {
-	constructor(data) {
-		super(data);
-		this.set('redirectURI', data.redirectURI);
-	}
+const Schema = _mongoose2.default.Schema;
 
-	duration() {
-		return 3600;
+const requestTokenSchema = new Schema({
+	client: {
+		type: Schema.Types.ObjectId,
+		ref: 'Client',
+		required: true
+	},
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	token: {
+		type: String
+	},
+	expiresIn: {
+		type: Date
 	}
+});
 
-	length() {
-		return 256;
-	}
-}
-exports.default = RequestToken;
+requestTokenSchema.virtual('duration').get(() => 3600);
+requestTokenSchema.virtual('length').get(() => 256);
+
+requestTokenSchema.pre('save', next => {
+	const token = undefined;
+
+	token.token = token.token || (0, _utils.uidGen)(token.length);
+	token.expiresIn = token.expiresIn || new Date(new Date().getTime() + token.duration * 1000);
+	next();
+});
+
+exports.default = _mongoose2.default.model('RequestToken', requestTokenSchema);

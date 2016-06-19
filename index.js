@@ -3,11 +3,7 @@
 const _ = require('lodash');
 
 const lib = {
-	Mongorito: require('mongorito'),
-	Model: require('./build/model'),
-	Utils: require('./build/utils').Utils,
-	Tenant: require('./build/models/abstracts/tenant'),
-	Token: require('./build/models/abstracts/token'),
+	Utils: require('./build/utils'),
 	AccessToken: require('./build/models/access-token'),
 	Client: require('./build/models/client'),
 	Group: require('./build/models/group'),
@@ -25,3 +21,5 @@ module.exports = _.mapValues(lib, val => {
 	}
 	return val;
 });
+
+console.log(module.exports);

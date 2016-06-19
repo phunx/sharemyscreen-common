@@ -20,12 +20,12 @@
   "dependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
     "babel-preset-stage-0": "^6.5.0",
-    "bcrypt": "^0.8.7",
-    "change-case": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "lodash": "^4.13.1",
-    "mongorito": "^2.0.0"
+    "mongoose": "^4.5.0",
+    "mongoose-bcrypt": "^1.4.2",
+    "mongoose-relationship": "^0.1.5"
   },
   "devDependencies": {
     "gulp-ava": "^0.11.0",
