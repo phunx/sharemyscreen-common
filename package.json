@@ -5,6 +5,9 @@
   "description": "Common objects library for ShareMyScreen services",
   "main": "index.js",
   "scripts": {
+	"preversion": "gulp lint && gulp clean && gulp build && npm test",
+	"version": "gulp changelog",
+	"postversion": "gulp version",
     "test": ""
   },
   "repository": {
@@ -29,10 +32,16 @@
   },
   "devDependencies": {
     "gulp-ava": "^0.11.0",
+    "gulp-changelogmd": "^1.0.6",
+    "gulp-clean": "^0.3.2",
     "gulp-xo": "^0.11.0",
     "xo": "^0.15.1"
   },
   "xo": {
     "esnext": true
-  }
+  },
+  "files": [
+	"index.js",
+	"./build"
+  ]
 }
