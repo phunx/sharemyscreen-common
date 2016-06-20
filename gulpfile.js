@@ -6,15 +6,14 @@ const clean = require('gulp-clean');
 const changelog = require('gulp-changelogmd');
 
 gulp.task('default', () => {
-
 });
 
 gulp.task('lint', () => {
-	gulp.src('lib/**/*.js')
+	gulp.src(['./*.js', 'test/**/*.js', 'lib/**/*.js'])
 		.pipe(xo());
 });
 
-/// BUILD
+// Build
 
 gulp.task('build', () => {
 	gulp.src('lib/**/*.js')
@@ -26,23 +25,23 @@ gulp.task('build', () => {
 });
 
 gulp.task('clean', () => {
-	console.log("Cleaning project ...");
-	return gulp.src(["./build"], { read: false })
+	console.log('Cleaning project ...');
+	return gulp.src(['./build'], {read: false})
 		.pipe(clean());
 });
 
-/// VERSIONING
+// Versioning
 
 gulp.task('changelog', () => {
-	const pkg = JSON.parse(fs.readFileSync("./package.json"));
+	const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
-	return gulp.src("./CHANGELOG.md")
+	return gulp.src('./CHANGELOG.md')
 		.pipe(changelog(pkg.version))
-		.pipe(gulp.dest("./"));
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('version', () => {
-	const pkg = JSON.parse(fs.readFileSync("./package.json"));
+	const pkg = JSON.parse(fs.readFileSync('./package.json'));
 
-	console.log('Current version is ' + pkg.version);
+	console.info(pkg.version);
 });

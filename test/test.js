@@ -1,6 +1,5 @@
-const smsCommon = require('../');
-const should = require('should');
+// const should = require('should');
+// const smsCommon = require('../');
 
-
-describe('Testing sharemyscreen-common package', function () {
+describe('Testing sharemyscreen-common package', () => {
 });
