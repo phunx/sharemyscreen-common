@@ -1,7 +1,7 @@
 {
   "name": "sharemyscreen-common",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Common objects library for ShareMyScreen services",
   "main": "index.js",
   "scripts": {
