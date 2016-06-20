@@ -28,21 +28,19 @@ const clientSchema = new Schema({
 		type: String,
 		unique: true
 	},
-	scope: {
-		type: [String],
-		default: ['offline_access']
-	},
 	trusted: {
 		type: Boolean,
 		default: false
 	}
 }, { timestamps: true });
 
-clientSchema.pre('save', next => {
-	const client = undefined;
+clientSchema.pre('validate', function (next) {
+	const client = this;
 
-	client.key = client.key || (0, _utils.uidGen)(16);
-	client.secret = client.secret || (0, _utils.uidGen)(32);
+	if (client.isNew) {
+		client.key = (0, _utils.uidGen)(16);
+		client.secret = (0, _utils.uidGen)(32);
+	}
 	next();
 });
 

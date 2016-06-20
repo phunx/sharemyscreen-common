@@ -1,0 +1,20 @@
+{
+  "password": {
+	"email": "test@password.com",
+	"password": "Hello",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  },
+  "google": {
+	"email": "test@google.com",
+	"googleId": "0123456789",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  },
+  "facebook": {
+	"email": "test@facebook.com",
+	"facebookId": "9876543210",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  }
+}

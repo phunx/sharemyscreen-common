@@ -22,24 +22,33 @@ const refreshTokenSchema = new Schema({
 	},
 	user: {
 		type: Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'User',
+		required: true
 	},
 	token: {
-		type: String
+		type: String,
+		required: true
 	},
+	scopes: [{
+		type: String,
+		required: true
+	}],
 	expiresIn: {
-		type: Date
+		type: Date,
+		required: true
 	}
 });
 
 refreshTokenSchema.virtual('duration').get(() => 24 * 3600);
 refreshTokenSchema.virtual('length').get(() => 256);
 
-refreshTokenSchema.pre('save', next => {
-	const token = undefined;
+refreshTokenSchema.pre('validate', function (next) {
+	const token = this;
 
-	token.token = token.token || (0, _utils.uidGen)(token.length);
-	token.expiresIn = token.expiresIn || new Date(new Date().getTime() + token.duration * 1000);
+	if (token.isNew) {
+		token.token = (0, _utils.uidGen)(token.length);
+		token.expiresIn = new Date(new Date().getTime() + token.duration * 1000);
+	}
 	next();
 });
 

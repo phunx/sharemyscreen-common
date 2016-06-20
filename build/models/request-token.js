@@ -38,8 +38,10 @@ requestTokenSchema.virtual('length').get(() => 256);
 requestTokenSchema.pre('save', next => {
 	const token = undefined;
 
-	token.token = token.token || (0, _utils.uidGen)(token.length);
-	token.expiresIn = token.expiresIn || new Date(new Date().getTime() + token.duration * 1000);
+	if (token.isNew) {
+		token.token = (0, _utils.uidGen)(token.length);
+		token.expiresIn = new Date(new Date().getTime() + token.duration * 1000);
+	}
 	next();
 });
 

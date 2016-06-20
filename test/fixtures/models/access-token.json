@@ -1,0 +1,14 @@
+{
+  "client": {
+	"name": "Test access_token client"
+  },
+  "user": {
+	"email": "test@accesstoken.com",
+	"password": "Hello",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  },
+  "token": {
+	"scopes": ["read", "write"]
+  }
+}

@@ -8,11 +8,27 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _utils = require('../utils');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Schema = _mongoose2.default.Schema;
 
 const organizationSchema = new Schema({
+	publicId: {
+		type: String,
+		require: true,
+		unique: true
+	},
+	name: {
+		type: String,
+		required: true
+	},
+	creator: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	},
 	owner: {
 		type: Schema.Types.ObjectId,
 		ref: 'User',
@@ -22,14 +38,17 @@ const organizationSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		required: true
-	}],
-	name: String
+	}]
 }, { timestamps: true });
 
-organizationSchema.pre('save', next => {
-	const organization = undefined;
+organizationSchema.pre('validate', function (next) {
+	const organization = this;
 
-	organization.members.unshift(organization.owner);
+	if (organization.isNew) {
+		organization.owner = organization.creator;
+		organization.members.unshift(organization.owner);
+		organization.publicId = (0, _utils.uidGen)(25);
+	}
 	next();
 });
 

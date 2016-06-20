@@ -1,0 +1,14 @@
+{
+  "client": {
+	"name": "Test refresh_token client"
+  },
+  "user": {
+	"email": "test@refreshtoken.com",
+	"password": "Hello",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  },
+  "token": {
+	"scopes": ["read", "write"]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "user": {
+	"email": "test@organization.com",
+	"password": "Hello",
+	"firstName": "Maxime",
+	"lastName": "Guedj"
+  },
+  "organization": {
+	"name": "Test org"
+  }
+}
