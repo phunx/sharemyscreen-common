@@ -1,14 +1,14 @@
 {
   "name": "sharemyscreen-common",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Common objects library for ShareMyScreen services",
   "main": "index.js",
   "scripts": {
-	"preversion": "gulp lint && gulp clean && gulp build && npm test",
-	"version": "gulp changelog",
-	"postversion": "gulp version",
-    "test": ""
+    "preversion": "gulp lint && gulp clean && gulp build && npm test",
+    "version": "gulp changelog",
+    "postversion": "gulp version",
+    "test": "istanbul cover _mocha -- test/ -R spec"
   },
   "repository": {
     "type": "git",
@@ -21,27 +21,27 @@
   },
   "homepage": "https://github.com/phunx/sharemyscreen-common#readme",
   "dependencies": {
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
     "lodash": "^4.13.1",
     "mongoose": "^4.5.0",
     "mongoose-bcrypt": "^1.4.2",
     "mongoose-relationship": "^0.1.5"
   },
   "devDependencies": {
-    "gulp-ava": "^0.11.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "gulp-changelogmd": "^1.0.6",
     "gulp-clean": "^0.3.2",
     "gulp-xo": "^0.11.0",
+    "should": "^9.0.2",
     "xo": "^0.15.1"
   },
   "xo": {
     "esnext": true
   },
   "files": [
-	"index.js",
-	"./build"
+    "index.js",
+    "./build"
   ]
 }

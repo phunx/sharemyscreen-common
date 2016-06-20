@@ -21,5 +21,3 @@ module.exports = _.mapValues(lib, val => {
 	}
 	return val;
 });
-
-console.log(module.exports);
