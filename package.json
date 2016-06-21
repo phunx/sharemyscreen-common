@@ -39,7 +39,8 @@
     "xo": "^0.15.1"
   },
   "xo": {
-    "esnext": true
+    "esnext": true,
+		"env": ["node", "mocha"]
   },
   "files": [
     "index.js",
